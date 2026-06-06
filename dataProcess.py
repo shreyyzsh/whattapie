@@ -1,7 +1,13 @@
 import pandas as pd
+import re
 
 def process_data(uploaded_file):
     df = pd.read_csv(uploaded_file)
+    
+    df.columns = [
+        re.sub(r"\.\d+$", "", col).strip()
+        for col in df.columns
+    ]
     
     question_columns = [col for col in df.columns if col != 'Timestamp']
     
