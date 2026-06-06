@@ -1,6 +1,6 @@
 import streamlit as st
-import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 from dataProcess import process_data
 
 st.set_page_config(
@@ -31,9 +31,8 @@ if uploaded_file:
         if len(answer_counts) == 0:
             continue
         
-        st.subheader(question)
-        
-        fig, ax = plt.subplots(figsize=(8,6))
+        fig, ax = plt.subplots(figsize=(8, 6))
+
         
         ax.pie(
             answer_counts.values,
@@ -42,6 +41,7 @@ if uploaded_file:
             startangle=90
         )
         
+        ax.set_title(question, pad=20)
         ax.axis("equal")
         
         st.pyplot(fig)
