@@ -5,7 +5,7 @@ def process_data(uploaded_file):
     df = pd.read_csv(uploaded_file)
     
     df.columns = [
-        re.sub(r"\.\d+$", "", col).strip()
+        re.sub(r"^Untitled Question \[(.*)\]$", r"\1", col).strip()
         for col in df.columns
     ]
     
