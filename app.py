@@ -1,7 +1,8 @@
+import io
 import streamlit as st
 import matplotlib.pyplot as plt
-import numpy as np
 from dataProcess import process_data
+
 
 st.set_page_config(
     page_title="WhattaPie",
@@ -45,4 +46,18 @@ if uploaded_file:
         ax.axis("equal")
         
         st.pyplot(fig)
+        
+        # download
+        buf = io.BytesIO()
+        fig.savefig(buf, format="png", bbox_inches="tight", dpi=300)
+        buf.seek(0)
+        
+        st.download_button(
+            label="Download Chart",
+            data=buf,
+            file_name=f"{question}.png",
+            mime="image/png",
+            key=f"download {question}"
+        )
+        
         plt.close(fig)
